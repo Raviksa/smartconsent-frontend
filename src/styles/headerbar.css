@@ -1,0 +1,20 @@
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 30px 0;
+}
+
+.create-btn {
+  padding: 14px 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #0055ff;
+  color: white;
+
+  font-size: 16px;
+  cursor: pointer;
+}

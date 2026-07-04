@@ -1,0 +1,35 @@
+.navbar {
+  background: white;
+  border-radius: 15px;
+  padding: 20px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 3px 10px
+  rgba(0,0,0,0.05);
+
+  margin-bottom: 30px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bell-icon {
+  font-size: 22px;
+  color: #ffbf00;
+}
+
+.doctor-info h4 {
+  margin: 0;
+}
+
+.doctor-info p {
+  margin: 0;
+  color: gray;
+  font-size: 14px;
+}

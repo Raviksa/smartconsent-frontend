@@ -1,0 +1,12 @@
+.active-badge {
+  display: inline-block;
+
+  background: #e8fff0;
+  color: green;
+
+  padding: 8px 14px;
+
+  border-radius: 30px;
+
+  margin-bottom: 20px;
+}

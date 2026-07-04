@@ -1,0 +1,29 @@
+.video-card {
+  width: 380px;
+  min-width: 400px;
+
+  background: white;
+  border-radius: 18px;
+
+  padding: 25px;
+
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.08);
+}
+
+.video-box {
+  width: 100%;
+  height: 230px;
+
+  background: #d9d9d9;
+
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 70px;
+  color: #0055ff;
+
+  margin-bottom: 20px;
+}

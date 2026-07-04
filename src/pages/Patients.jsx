@@ -28,55 +28,74 @@ const [formData, setFormData] =
     loadPatients();
   }, []);
 
-  const loadPatients = async () => {
-    try {
-      const res = await axios.get(
-        "http://localhost:5000/api/patients"
-      );
+ const loadPatients = async () => {
+  try {
+    const token =
+      localStorage.getItem("token");
 
-      setPatients(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const res = await axios.get(
+      "http://localhost:5000/api/patients",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    setPatients(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
   const [search,
 setSearch] =
 useState("");
-    const savePatient =
-async () => {
+    const savePatient = async () => {
   try {
+    const token =
+      localStorage.getItem("token");
 
- if (editingId) {
-
-  await axios.put(
-    `http://localhost:5000/api/patients/${editingId}`,
-    formData
-  );
-
-} else {
-
-  await axios.post(
-    "http://localhost:5000/api/patients",
-    formData
-  );
-}
-    setFormData({
-  surgeon_id: 2,
-  full_name: "",
-  age: "",
-  gender: "",
-  phone: "",
-  email: "",
-  address: "",
-  mrn: "",
-  diagnosis: "",
-  side: "",
-  suggested_procedure: "",
-  notes: ""
-});
-    setShowForm(false);
+    if (editingId) {
+      await axios.put(
+        `http://localhost:5000/api/patients/${editingId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+    } else {
+      await axios.post(
+        "http://localhost:5000/api/patients",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+    }
 
     loadPatients();
+
+    setShowForm(false);
+
+    setEditingId(null);
+
+    setFormData({
+      full_name: "",
+      age: "",
+      gender: "",
+      phone: "",
+      email: "",
+      address: "",
+      mrn: "",
+      diagnosis: "",
+      side: "",
+      suggested_procedure: "",
+      notes: ""
+    });
 
   } catch (err) {
     console.log(err);
@@ -86,8 +105,17 @@ const deletePatient =
 async (id) => {
   try {
 
+    const token =
+      localStorage.getItem("token");
+
     await axios.delete(
-      `http://localhost:5000/api/patients/${id}`
+      `http://localhost:5000/api/patients/${id}`,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${token}`
+        }
+      }
     );
 
     loadPatients();

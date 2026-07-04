@@ -57,9 +57,19 @@ const [
   const loadPatients =
   async () => {
     try {
+
+      const token =
+        localStorage.getItem("token");
+
       const res =
         await axios.get(
-          "http://localhost:5000/api/patients"
+          "http://localhost:5000/api/patients",
+          {
+            headers: {
+              Authorization:
+                `Bearer ${token}`
+            }
+          }
         );
 
       setPatients(
@@ -118,24 +128,25 @@ async () => {
 
   try {
 
-    const res =
-      await axios.post(
-        "http://localhost:5000/api/ai/generate-consent",
-        {
-          patient:
-            selectedPatient,
+    const token =
+  localStorage.getItem("token");
 
-          procedure:
-            selectedProcedure,
-
-          risks:
-            selectedRisks,
-
-          instructions:
-            additionalInstructions
-        }
-      );
-
+const res =
+  await axios.post(
+    "http://localhost:5000/api/ai/generate-consent",
+    {
+      patient: selectedPatient,
+      procedure: selectedProcedure,
+      risks: selectedRisks,
+      instructions: additionalInstructions
+    },
+    {
+      headers: {
+        Authorization:
+          `Bearer ${token}`
+      }
+    }
+  );
     setGeneratedConsent(
       res.data.consent
     );
@@ -157,27 +168,26 @@ async () => {
           )
       );
 console.log(selectedImages);
-    const res =
-      await axios.post(
-        "http://localhost:5000/api/pdf/generate",
-        {
-          patient:
-            selectedPatient,
+const token =
+  localStorage.getItem("token");
 
-          procedure:
-            selectedProcedure,
-
-          consent:
-            generatedConsent,
-
-          illustrations:
-            selectedImages
-        },
-        {
-          responseType:
-            "blob"
-        }
-      );
+const res =
+  await axios.post(
+    "http://localhost:5000/api/pdf/generate",
+    {
+      patient: selectedPatient,
+      procedure: selectedProcedure,
+      consent: generatedConsent,
+      illustrations: selectedImages
+    },
+    {
+      responseType: "blob",
+      headers: {
+        Authorization:
+          `Bearer ${token}`
+      }
+    }
+  );
 
     const file =
       new Blob(

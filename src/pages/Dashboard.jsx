@@ -20,7 +20,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-
+const [
+  recentConsents,
+  setRecentConsents
+] = useState([]);
 const [user, setUser] = useState(null);
 const [stats, setStats] =
   useState({
@@ -60,7 +63,32 @@ useEffect(() => {
     navigate("/");
     return;
   }
+  const loadRecentConsents =
+async () => {
+  try {
 
+    const token =
+      localStorage.getItem("token");
+
+    const res =
+      await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/dashboard/recent-consents`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`
+          }
+        }
+      );
+
+    setRecentConsents(
+      res.data
+    );
+
+  } catch (err) {
+    console.log(err);
+  }
+};
   const storedUser =
     localStorage.getItem("user");
 
@@ -70,6 +98,7 @@ useEffect(() => {
     );
   }
    loadStats();
+   loadRecentConsents();
 
 }, [navigate]);
 
@@ -128,7 +157,11 @@ className="middle-row"
 </div>
 <div className="bottom-row">
 
-  <ConsentTable />
+  <ConsentTable
+  recentConsents={
+    recentConsents
+  }
+/>
 
   <SubscriptionCard />
 

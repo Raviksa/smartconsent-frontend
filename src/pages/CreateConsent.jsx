@@ -22,6 +22,15 @@ export default function CreateConsent() {
   "Kidney Disease",
   "Anticoagulants"
 ];
+useEffect(() => {
+  loadPatients();
+  loadProcedures();
+
+  console.log(
+    "API URL:",
+    import.meta.env.VITE_API_URL
+  );
+}, []);
 const [
   selectedRisks,
   setSelectedRisks
@@ -156,6 +165,7 @@ const res =
 };
 const generatePdf =
 async () => {
+
 
   try {
 

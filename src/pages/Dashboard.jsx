@@ -22,7 +22,37 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
 const [user, setUser] = useState(null);
+const [stats, setStats] =
+  useState({
+    consentRequests: 0,
+    completed: 0
+  });
+  const loadStats =
+async () => {
+  try {
 
+    const token =
+      localStorage.getItem("token");
+
+    const res =
+      await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/dashboard/stats`,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${token}`
+          }
+        }
+      );
+
+    setStats(
+      res.data
+    );
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 useEffect(() => {
   const token = localStorage.getItem("token");
 
@@ -39,7 +69,10 @@ useEffect(() => {
       JSON.parse(storedUser)
     );
   }
+   loadStats();
+
 }, [navigate]);
+
   return (
     <div className="dashboard-container">
 
@@ -68,30 +101,20 @@ useEffect(() => {
 
        
         <div className="cards">
-
-          <StatCard
+<StatCard
   title="Consent Requests"
-  value="28"
+  value={stats.consentRequests}
   icon={<FaClipboardList />}
 />
 
 <StatCard
   title="Completed"
-  value="16"
+  value={stats.completed}
   icon={<FaCheckCircle />}
 />
 
-<StatCard
-  title="Understanding"
-  value="82%"
-  icon={<FaChartPie />}
-/>
 
-<StatCard
-  title="Videos Watched"
-  value="12"
-  icon={<FaVideo />}
-/>
+
         </div>
 
         <div

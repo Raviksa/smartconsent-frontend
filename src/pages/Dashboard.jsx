@@ -1,3 +1,4 @@
+
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import StatCard from "../components/StatCard";
@@ -50,10 +51,10 @@ useEffect(() => {
       
        <div className="welcome-section">
   <div>
-    <h1>
-      Good Morning,
-      {user?.full_name} 👋
-    </h1>
+   <h1>
+  Good Morning,
+  Dr. {user?.full_name} 👋
+</h1>
 
     <p>
       Manage presurgical consent and educate your patients with 3D videos.

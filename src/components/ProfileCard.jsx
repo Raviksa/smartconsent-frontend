@@ -17,18 +17,19 @@ export default function ProfileCard() {
       </div>
 
       <h2>
-        Dr Ravi Sarode
+        Dr. {user?.full_name}
       </h2>
 
       <p>
-        Orthopaedic Surgeon
+          {user?.speciality}
       </p>
 
       <hr />
 
       <p>
         <FaHospital />
-        Smart Multispeciality Hospital
+  {" "}
+  {user?.hospital_name}
       </p>
 
       <p>

@@ -27,9 +27,9 @@ export default function ProfileCard() {
   return (
     <div className="profile-card">
 
-      <h3>
-        {user?.full_name}
-      </h3>
+    <h3>
+     Dr. {user?.full_name}
+     </h3>
 
       <p>
         {user?.speciality}
@@ -40,7 +40,8 @@ export default function ProfileCard() {
       <p>
         <FaHospital />
         {" "}
-        {user?.hospital_name}
+       {user?.hospital_name ||
+    "Hospital"}
       </p>
 
       <p>

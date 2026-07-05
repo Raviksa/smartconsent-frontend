@@ -1,5 +1,9 @@
 import {
-  FaUserMd,
+  useEffect,
+  useState
+} from "react";
+
+import {
   FaHospital,
   FaCalendarAlt
 } from "react-icons/fa";
@@ -7,13 +11,26 @@ import {
 import "../styles/profilecard.css";
 
 export default function ProfileCard() {
+
+  const [user, setUser] =
+    useState(null);
+
+  useEffect(() => {
+    const storedUser =
+      localStorage.getItem("user");
+
+    if (storedUser) {
+      setUser(
+        JSON.parse(storedUser)
+      );
+    }
+  }, []);
+
   return (
     <div className="profile-card">
 
       <div className="doctor-avatar">
-
         👨‍⚕️
-
       </div>
 
       <h2>
@@ -21,21 +38,21 @@ export default function ProfileCard() {
       </h2>
 
       <p>
-          {user?.speciality}
+        {user?.speciality}
       </p>
 
       <hr />
 
       <p>
         <FaHospital />
-  {" "}
-  {user?.hospital_name}
+        {" "}
+        {user?.hospital_name}
       </p>
 
       <p>
         <FaCalendarAlt />
-        Expires:
-        15 Aug 2026
+        {" "}
+        Expires: 15 Aug 2026
       </p>
 
     </div>

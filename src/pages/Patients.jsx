@@ -34,13 +34,13 @@ const [formData, setFormData] =
       localStorage.getItem("token");
 
     const res = await axios.get(
-      "http://localhost:5000/api/patients",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    );
+  `${import.meta.env.VITE_API_URL}/api/patients`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
 
     setPatients(res.data);
   } catch (err) {
@@ -57,7 +57,7 @@ useState("");
 
     if (editingId) {
       await axios.put(
-        `http://localhost:5000/api/patients/${editingId}`,
+        `${import.meta.env.VITE_API_URL}api/patients/${editingId}`,
         formData,
         {
           headers: {
@@ -66,16 +66,16 @@ useState("");
         }
       );
     } else {
-      await axios.post(
-        "http://localhost:5000/api/patients",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-      );
+  await axios.post(
+    `${import.meta.env.VITE_API_URL}/api/patients`,
+    formData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
+  );
+}
 
     loadPatients();
 
@@ -109,14 +109,14 @@ async (id) => {
       localStorage.getItem("token");
 
     await axios.delete(
-      `http://localhost:5000/api/patients/${id}`,
-      {
-        headers: {
-          Authorization:
-            `Bearer ${token}`
-        }
-      }
-    );
+  `${import.meta.env.VITE_API_URL}/api/patients/${id}`,
+  {
+    headers: {
+      Authorization:
+        `Bearer ${token}`
+    }
+  }
+);
 
     loadPatients();
 

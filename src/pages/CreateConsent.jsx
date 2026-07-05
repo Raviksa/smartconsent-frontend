@@ -63,7 +63,7 @@ const [
 
       const res =
         await axios.get(
-          "http://localhost:5000/api/patients",
+          `${import.meta.env.VITE_API_URL}/api/patients`,
           {
             headers: {
               Authorization:
@@ -86,7 +86,7 @@ const [
     try {
       const res =
         await axios.get(
-          "http://localhost:5000/api/procedures"
+          `${import.meta.env.VITE_API_URL}/api/procedures`
         );
 
       setProcedures(
@@ -97,7 +97,6 @@ const [
       console.log(err);
     }
   };
-
   const loadIllustrations =
   async (procedureId) => {
 
@@ -105,14 +104,14 @@ const [
 
       const res =
         await axios.get(
-          "http://localhost:5000/api/procedure-illustrations"
+          `${import.meta.env.VITE_API_URL}/api/procedure-illustrations`
         );
 
       const filtered =
         res.data.filter(
           i =>
-          i.procedure_id ==
-          procedureId
+            i.procedure_id ==
+            procedureId
         );
 
       setIllustrations(
@@ -133,7 +132,7 @@ async () => {
 
 const res =
   await axios.post(
-    "http://localhost:5000/api/ai/generate-consent",
+    `${import.meta.env.VITE_API_URL}/api/ai/generate-consent`,
     {
       patient: selectedPatient,
       procedure: selectedProcedure,
@@ -173,7 +172,7 @@ const token =
 
 const res =
   await axios.post(
-    "http://localhost:5000/api/pdf/generate",
+    `${import.meta.env.VITE_API_URL}/api/pdf/generate`,
     {
       patient: selectedPatient,
       procedure: selectedProcedure,

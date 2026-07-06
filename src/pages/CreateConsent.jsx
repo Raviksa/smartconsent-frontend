@@ -63,7 +63,7 @@ const [
 
       const token =
         localStorage.getItem("token");
-
+     
       const res =
         await axios.get(
           `${import.meta.env.VITE_API_URL}/api/patients`,
@@ -127,7 +127,8 @@ const [
   };
   const generateConsent =
 async () => {
-
+console.log("Generate clicked");
+  console.log("API URL:", import.meta.env.VITE_API_URL);
   try {
 
     const token =
@@ -140,7 +141,8 @@ const res =
       patient: selectedPatient,
       procedure: selectedProcedure,
       risks: selectedRisks,
-      instructions: additionalInstructions
+      instructions: additionalInstructions,
+      language
     },
     {
       headers: {
@@ -226,6 +228,8 @@ const res =
     console.log(err);
   }
 };
+const [language, setLanguage] =
+useState("English");
   return (
     <DashboardLayout>
    <div className="page-container">
@@ -539,6 +543,36 @@ Additional Instructions
     )
   }
 />
+<h3>
+Regional Language
+</h3>
+
+<select
+  value={language}
+  onChange={(e) =>
+    setLanguage(e.target.value)
+  }
+>
+  <option value="English">
+    English Only
+  </option>
+
+  <option value="Marathi">
+    English + Marathi
+  </option>
+
+  <option value="Hindi">
+    English + Hindi
+  </option>
+
+  <option value="Gujarati">
+    English + Gujarati
+  </option>
+
+  <option value="Tamil">
+    English + Tamil
+  </option>
+</select>
 <button
   className="primary-btn"
   onClick={generateConsent}

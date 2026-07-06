@@ -25,26 +25,37 @@ export default function Register() {
   };
 
   const handleRegister =
-    async () => {
-      try {
+  async () => {
+    try {
+
+      const data = {
+        ...formData,
+        full_name:
+          formData.full_name.replace(
+            /^dr\.?\s*/i,
+            ""
+          )
+      };
+
       await axios.post(
-  `${import.meta.env.VITE_API_URL}/api/auth/register`,
-  formData
-);
-        alert(
-          "Registration Successful"
-        );
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
+        data
+      );
 
-        navigate("/");
+      alert(
+        "Registration Successful"
+      );
 
-      } catch (err) {
-        console.log(err);
+      navigate("/");
 
-        alert(
-          "Registration Failed"
-        );
-      }
-    };
+    } catch (err) {
+      console.log(err);
+
+      alert(
+        "Registration Failed"
+      );
+    }
+  };
 
   return (
     <div className="register-page">

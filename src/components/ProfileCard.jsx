@@ -52,7 +52,7 @@ export default function ProfileCard() {
       <p>
         <FaCalendarAlt />
         {" "}
-        Expires: 15 Aug 2026
+       Plan Expires: 15 Aug 2026
       </p>
 
     </div>

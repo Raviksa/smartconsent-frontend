@@ -1,5 +1,3 @@
-import "../styles/videocard.css";
-
 export default function VideoCard() {
   return (
     <div className="video-card">
@@ -8,23 +6,19 @@ export default function VideoCard() {
         3D Video Preview
       </h3>
 
-      <div className="video-box">
-
-        ▶
-
-      </div>
-
-      <h4>
-        Total Knee Replacement (TKR)
-      </h4>
+      <video
+        width="100%"
+        controls
+      >
+        <source
+          src="/videos/tkr.mp4"
+          type="video/mp4"
+        />
+      </video>
 
       <p>
-        Explains procedure, risks and recovery.
+        Total Knee Replacement (TKR)
       </p>
-
-      <span>
-        Duration: 4:35
-      </span>
 
     </div>
   );

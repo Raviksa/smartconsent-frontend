@@ -1,24 +1,31 @@
-.quick-create {
-  flex: 1;
-  min-width: 550px;
-
-  background: white;
-  margin-top: 30px;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0px 0px 10px #ddd;
+.quick-create{
+  background:white;
+  border-radius:15px;
+  padding:30px;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.08);
 }
 
-.quick-create select {
-  width: 100%;
-  padding: 12px;
+.quick-create h2{
+  margin-bottom:15px;
 }
 
-.quick-create button {
-  width: 100%;
-  padding: 14px;
-  background: #0055ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.quick-create p{
+  color:#666;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+
+.quick-create button{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:14px 24px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.quick-create button:hover{
+  background:#1d4ed8;
 }

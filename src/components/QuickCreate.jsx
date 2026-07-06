@@ -1,42 +1,36 @@
+import {
+  useNavigate
+}
+from "react-router-dom";
+
 import "../styles/quickcreate.css";
 
 export default function QuickCreate() {
+
+  const navigate =
+    useNavigate();
+
   return (
     <div className="quick-create">
 
       <h2>
-        Quick Create Consent
+        🩺 Start New Consent
       </h2>
 
-      <select>
-        <option>
-          Orthopaedics
-        </option>
-      </select>
+      <p>
+        Create an AI-assisted informed
+        consent and educate your patient
+        with educational videos and illustrations.
+      </p>
 
-      <br />
-      <br />
-
-      <select>
-        <option>
-          Knee Surgery
-        </option>
-      </select>
-
-      <br />
-      <br />
-
-      <select>
-        <option>
-          Total Knee Replacement
-        </option>
-      </select>
-
-      <br />
-      <br />
-
-      <button>
-        Generate Consent
+      <button
+        onClick={() =>
+          navigate(
+            "/create-consent"
+          )
+        }
+      >
+        + Start New Consent
       </button>
 
     </div>

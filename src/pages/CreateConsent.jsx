@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import "../styles/createConsent.css";
+import DashboardLayout
+from "../components/DashboardLayout";
 export default function CreateConsent() {
 
   const [
@@ -22,15 +24,7 @@ export default function CreateConsent() {
   "Kidney Disease",
   "Anticoagulants"
 ];
-useEffect(() => {
-  loadPatients();
-  loadProcedures();
 
-  console.log(
-    "API URL:",
-    import.meta.env.VITE_API_URL
-  );
-}, []);
 const [
   selectedRisks,
   setSelectedRisks
@@ -233,235 +227,254 @@ const res =
   }
 };
   return (
-    
-    <div
-      style={{
-        padding: "30px"
-      }}
-    >
-      <h1>
-        Create Consent
-      </h1>
+    <DashboardLayout>
+   <div className="page-container">
+     <h1 className="page-title">
+  Create Consent
+     </h1>
      <p>Patients Loaded: {patients.length}</p>
 <p>Procedures Loaded: {procedures.length}</p>
+     
+    <div className="top-section">
 
-     <h3>Patient</h3>
+  <div className="card">
 
-<select
-  onChange={(e) => {
+    <h3>Patient</h3>
 
-    const patient =
-      patients.find(
-        p =>
-        p.id ==
-        e.target.value
-      );
+    <select
+      onChange={(e) => {
+        const patient =
+          patients.find(
+            p =>
+              p.id ==
+              e.target.value
+          );
 
-    setSelectedPatient(
-      patient
-    );
-  }}
->
-  <option>
-    Select Patient
-  </option>
-
-  {
-    patients.map(
-      patient => (
-
-        <option
-          key={patient.id}
-          value={patient.id}
-        >
-          {patient.full_name}
-        </option>
-
-      )
-    )
-  }
-</select>
-{
-selectedPatient && (
-
-<div>
-
-  <p>
-    Diagnosis:
-    {" "}
-    {
-      selectedPatient.diagnosis
-    }
-  </p>
-
-  <p>
-    Age:
-    {" "}
-    {
-      selectedPatient.age
-    }
-  </p>
-
-  <p>
-    Side:
-    {" "}
-    {
-      selectedPatient.side
-    }
-  </p>
-
-</div>
-
-)
-}
-<h3>
-  Procedure
-</h3>
-
-<select
-  onChange={(e) => {
-
-    const procedure =
-      procedures.find(
-        p =>
-        p.id ==
-        e.target.value
-      );
-
-    setSelectedProcedure(
-      procedure
-    );
-
-    loadIllustrations(
-      e.target.value
-    );
-  }}
->
-  <option>
-    Select Procedure
-  </option>
-
-  {
-    procedures.map(
-      p => (
-
-        <option
-          key={p.id}
-          value={p.id}
-        >
-          {p.name}
-        </option>
-
-      )
-    )
-  }
-</select>
-{
-selectedProcedure && (
-
-<div>
-
-  <h3>
-    Procedure Video
-  </h3>
-
-  <video
-    width="700"
-    controls
-  >
-    <source
-      src={
-        selectedProcedure.video_url
-      }
-      type="video/mp4"
-    />
-  </video>
-
-</div>
-
-)
-}
-{
-illustrations.length > 0 && (
-
-<div>
-
-  <h3>
-    Illustrations
-  </h3>
-
-  {
-illustrations.map(
-  illustration => (
-
-    <div
-      key={
-        illustration.id
-      }
-      style={{
-        marginBottom: "20px"
+        setSelectedPatient(
+          patient
+        );
       }}
     >
+      <option>
+        Select Patient
+      </option>
 
-      <input
-        type="checkbox"
-        checked={
-          selectedIllustrations.includes(
-            illustration.id
+      {
+        patients.map(
+          patient => (
+            <option
+              key={patient.id}
+              value={patient.id}
+            >
+              {patient.full_name}
+            </option>
           )
-        }
-        onChange={() => {
+        )
+      }
+    </select>
 
-          if (
-            selectedIllustrations.includes(
-              illustration.id
-            )
-          ) {
+    {
+      selectedPatient && (
 
-            setSelectedIllustrations(
-              selectedIllustrations.filter(
-                id =>
-                  id !==
-                  illustration.id
+        <div>
+
+          <p>
+            Diagnosis:
+            {" "}
+            {
+              selectedPatient.diagnosis
+            }
+          </p>
+
+          <p>
+            Age:
+            {" "}
+            {
+              selectedPatient.age
+            }
+          </p>
+
+          <p>
+            Side:
+            {" "}
+            {
+              selectedPatient.side
+            }
+          </p>
+
+        </div>
+
+      )
+    }
+
+  </div>
+
+  <div className="card">
+
+    <h3>
+      Procedure
+    </h3>
+
+    <select
+      onChange={(e) => {
+
+        const procedure =
+          procedures.find(
+            p =>
+              p.id ==
+              e.target.value
+          );
+
+        setSelectedProcedure(
+          procedure
+        );
+
+        loadIllustrations(
+          e.target.value
+        );
+      }}
+    >
+      <option>
+        Select Procedure
+      </option>
+
+      {
+        procedures.map(
+          p => (
+            <option
+              key={p.id}
+              value={p.id}
+            >
+              {p.name}
+            </option>
+          )
+        )
+      }
+    </select>
+
+    {
+      selectedProcedure && (
+
+        <div className="video-box">
+
+          <h3>
+            Procedure Video
+          </h3>
+
+          <video
+            controls
+          >
+            <source
+              src={
+                selectedProcedure.video_url
+              }
+              type="video/mp4"
+            />
+          </video>
+
+        </div>
+
+      )
+    }
+
+    {
+      illustrations.length > 0 && (
+
+        <div>
+
+          <h3>
+            Illustrations
+          </h3>
+
+          <div
+            className="illustration-grid"
+          >
+
+            {
+              illustrations.map(
+                illustration => (
+
+                  <div
+                    key={
+                      illustration.id
+                    }
+                    className="illustration-card"
+                  >
+
+                    <input
+                      type="checkbox"
+                      checked={
+                        selectedIllustrations.includes(
+                          illustration.id
+                        )
+                      }
+                      onChange={() => {
+
+                        if (
+                          selectedIllustrations.includes(
+                            illustration.id
+                          )
+                        ) {
+
+                          setSelectedIllustrations(
+                            selectedIllustrations.filter(
+                              id =>
+                                id !==
+                                illustration.id
+                            )
+                          );
+
+                        } else {
+
+                          setSelectedIllustrations([
+                            ...selectedIllustrations,
+                            illustration.id
+                          ]);
+
+                        }
+                      }}
+                    />
+
+                    <img
+                      src={
+                        illustration.image_url
+                      }
+                    />
+
+                    <p>
+                      {
+                        illustration.caption
+                      }
+                    </p>
+
+                  </div>
+
+                )
               )
-            );
+            }
 
-          } else {
+          </div>
 
-            setSelectedIllustrations([
-              ...selectedIllustrations,
-              illustration.id
-            ]);
+        </div>
 
-          }
-        }}
-      />
+      )
+    }
 
-      <img
-        src={
-          illustration.image_url
-        }
-        width="200"
-      />
-
-      <p>
-        {
-          illustration.caption
-        }
-      </p>
-
-    </div>
-  )
-)
-  }
-
+  </div>
 </div>
 
-)
-}
+      
+    
+<div className="card"></div>
+
+
+
 <h3>
 Patient Specific Risks
 </h3>
+
+<div className="risk-grid">
+</div>
 
 {
 risks.map(
@@ -505,22 +518,21 @@ risks.map(
       {risk}
 
     </div>
+    
+
 
   )
 )
 }
+<div className="card"></div>
 <h3>
 Additional Instructions
 </h3>
 
 <textarea
+  className="instruction-textarea"
   rows="5"
-  style={{
-    width: "100%"
-  }}
-  value={
-    additionalInstructions
-  }
+  value={additionalInstructions}
   onChange={(e) =>
     setAdditionalInstructions(
       e.target.value
@@ -528,36 +540,29 @@ Additional Instructions
   }
 />
 <button
-  onClick={
-    generateConsent
-  }
+  className="primary-btn"
+  onClick={generateConsent}
 >
   Generate AI Draft
 </button>
 
 <textarea
-  rows="20"
-  style={{
-    width: "100%"
-  }}
-  value={
-    generatedConsent
-  }
+  className="consent-textarea"
+  value={generatedConsent}
   onChange={(e) =>
     setGeneratedConsent(
       e.target.value
     )
   }
-  
 />
 <button
-  onClick={
-    generatePdf
-  }
+  className="primary-btn"
+  onClick={generatePdf}
 >
-Generate PDF
+  Generate PDF
 </button>
     </div>
+    </DashboardLayout>
   );
 
 }

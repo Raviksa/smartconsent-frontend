@@ -123,9 +123,7 @@ async () => {
     </p>
   </div>
 
-  <button className="new-consent-btn">
-    + Create New Consent
-  </button>
+ 
 </div>
 
        

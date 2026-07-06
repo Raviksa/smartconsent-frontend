@@ -9,32 +9,29 @@
 
 .logo {
   margin-bottom: 40px;
+   color: white;
+  font-size: 30px;
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
-.menu a {
-  color: white;
-  text-decoration: none;
-
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
-  padding: 14px;
-  border-radius: 10px;
-
-  font-size: 18px;
-
-  transition: 0.3s;
+.menu a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  margin-bottom:10px;
+  transition:0.2s;
 }
-
-.menu a:hover {
-  background: rgba(255,255,255,0.15);
+.menu a:hover{
+  background:#123d99;
 }
 .logout-btn {
   width: 100%;
@@ -50,7 +47,9 @@
   align-items: center;
   gap: 12px;
 }
-
+.menu a.active-link{
+  background:#2563eb;
+}
 .logout-btn:hover {
   background: rgba(255,255,255,0.1);
   border-radius: 10px;

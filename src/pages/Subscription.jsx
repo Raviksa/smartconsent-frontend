@@ -1,30 +1,15 @@
-import "../styles/subscriptioncard.css";
+import DashboardLayout
+from "../components/DashboardLayout";
 
-export default function SubscriptionCard() {
+import SubscriptionCard
+from "../components/SubscriptionCard";
+
+export default function Subscription() {
   return (
-    <div className="subscription-card">
+    <DashboardLayout>
 
-      <h3>
-        Subscription Plan
-      </h3>
+      <SubscriptionCard />
 
-      <h2>
-        Orthopaedics
-      </h2>
-
-      <div className="active-badge">
-        Active
-      </div>
-
-      <p>
-        Valid till:
-        15 Aug 2026
-      </p>
-
-      <button>
-        Manage Plan
-      </button>
-
-    </div>
+    </DashboardLayout>
   );
 }

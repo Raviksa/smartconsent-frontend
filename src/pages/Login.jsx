@@ -7,7 +7,6 @@ import axios from "axios";
 
 import {
   FaGoogle,
-  FaMicrosoft,
   FaCheckCircle,
   FaShieldAlt,
   FaUserMd
@@ -72,7 +71,7 @@ export default function Login() {
           </h1>
 
           <h2>
-            Interactive 3D Videos
+            Interactive Videos
             <br />
             Better Understanding
             <br />
@@ -84,7 +83,7 @@ export default function Login() {
             <p>
               <FaUserMd />
               <span>
-                3D Patient Education
+                Audio-Visual Patient Education
               </span>
             </p>
 
@@ -155,24 +154,23 @@ export default function Login() {
           >
             Login
           </button>
+          
+          {false && (
+  <>
+    <div className="divider">
+      or continue with
+    </div>
 
-          <div className="divider">
-            or continue with
-          </div>
+    <button className="social-btn">
+      <FaGoogle />
+      <span>
+        Continue with Google
+      </span>
+    </button>
+  </>
+)}
 
-          <button className="social-btn">
-            <FaGoogle />
-            <span>
-              Continue with Google
-            </span>
-          </button>
-
-          <button className="social-btn">
-            <FaMicrosoft />
-            <span>
-              Continue with Microsoft
-            </span>
-          </button>
+          
 
         <p className="signup">
   Don't have an account?{" "}

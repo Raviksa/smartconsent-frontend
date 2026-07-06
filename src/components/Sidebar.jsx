@@ -8,13 +8,16 @@ import {
   FaFolderOpen
 } from "react-icons/fa";
 
-import { Link, useNavigate }
+import { Link, useNavigate ,useLocation}
 from "react-router-dom";
 
 import "../styles/sidebar.css";
 
+
 export default function Sidebar() {
   const navigate = useNavigate();
+  const location =
+  useLocation();
 
   const handleLogout = () => {
     // Remove authentication data
@@ -33,21 +36,40 @@ export default function Sidebar() {
       </h2>
 
       <div className="menu">
+<Link
+  to="/dashboard"
+  className={
+    location.pathname === "/dashboard"
+      ? "active-link"
+      : ""
+  }
+>
+  <FaHome />
+  Dashboard
+</Link>
 
-        <Link to="/dashboard">
-          <FaHome />
-          Dashboard
-        </Link>
-
-        <Link to="/create-consent">
-          <FaFileAlt />
-          Create Consent
-        </Link>
-
-        <Link to="/patients">
-          <FaUserFriends />
-          Patients
-        </Link>
+   <Link
+  to="/create-consent"
+  className={
+    location.pathname === "/create-consent"
+      ? "active-link"
+      : ""
+  }
+>
+  <FaFileAlt />
+  Create Consent
+</Link>
+<Link
+  to="/patients"
+  className={
+    location.pathname === "/patients"
+      ? "active-link"
+      : ""
+  }
+>
+  <FaUserFriends />
+  Patients
+</Link>
 
         <Link to="/subscription">
           <FaCreditCard />

@@ -74,11 +74,63 @@ export default function Register() {
           onChange={handleChange}
         />
 
-        <input
-          name="speciality"
-          placeholder="Speciality"
-          onChange={handleChange}
-        />
+        <select
+  name="speciality"
+  value={formData.speciality}
+  onChange={handleChange}
+>
+  <option value="">
+    Select Speciality
+  </option>
+
+  <option value="Orthopaedics">
+    Orthopaedics
+  </option>
+   <option value="Surgical Oncology">
+    Surgical Oncology
+  </option>
+  <option value="General Surgery">
+    General Surgery
+  </option>
+
+  <option value="Neurosurgery">
+    Neurosurgery
+  </option>
+
+  <option value="Urology">
+    Urology
+  </option>
+
+  <option value="Plastic Surgery">
+    Plastic Surgery
+  </option>
+
+  <option value="ENT">
+    ENT
+  </option>
+
+  <option value="Ophthalmology">
+    Ophthalmology
+  </option>
+
+  <option value="Obstetrics & Gynaecology">
+    Obstetrics & Gynaecology
+  </option>
+
+  <option value="Cardiothoracic Surgery">
+    Cardiothoracic Surgery
+  </option>
+
+ 
+
+  <option value="Dentistry">
+    Dentistry
+  </option>
+
+  <option value="Other">
+    Other
+  </option>
+</select>
 
         <input
           name="hospital_name"

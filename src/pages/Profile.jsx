@@ -1,55 +1,67 @@
-import { useEffect, useState }
-from "react";
+import DashboardLayout
+from "../components/DashboardLayout";
 
-import {
-  FaHospital,
-  FaCalendar
-}
-from "react-icons/fa";
+export default function Profile() {
 
-import "../styles/profilecard.css";
-
-export default function ProfileCard() {
-  const [user, setUser] =
-    useState(null);
-
-  useEffect(() => {
-    const storedUser =
-      localStorage.getItem("user");
-
-    if (storedUser) {
-      setUser(
-        JSON.parse(storedUser)
-      );
-    }
-  }, []);
+  const user =
+    JSON.parse(
+      localStorage.getItem("user")
+    );
 
   return (
-    <div className="profile-card">
+    <DashboardLayout>
 
-    <h3>
-     Dr. {user?.full_name}
-     </h3>
+      <div className="page-container">
 
-      <p>
-        {user?.speciality}
-      </p>
+        <div className="card">
 
-      <hr />
+          <h1>
+            Profile
+          </h1>
 
-      <p>
-        <FaHospital />
-        {" "}
-       {user?.hospital_name ||
-    "Hospital"}
-      </p>
+          <h2>
+            Dr. {user?.full_name}
+          </h2>
 
-      <p>
-        <FaCalendar />
-        {" "}
-        Subscription Active
-      </p>
+          <p>
+            {user?.speciality}
+          </p>
 
-    </div>
+          <hr />
+
+          <p>
+            <b>Email:</b>
+            {" "}
+            {user?.email}
+          </p>
+
+          <p>
+            <b>Hospital:</b>
+            {" "}
+            {user?.hospital_name}
+          </p>
+
+          <p>
+            <b>Phone:</b>
+            {" "}
+            {user?.phone}
+          </p>
+
+          <p>
+            <b>Subscription:</b>
+            Active
+          </p>
+
+          <button
+            className="primary-btn"
+          >
+            Edit Profile
+          </button>
+
+        </div>
+
+      </div>
+
+    </DashboardLayout>
   );
 }

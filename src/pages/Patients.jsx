@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/patients.css";
+import DashboardLayout
+from "../components/DashboardLayout";
 
 export default function Patients() {
 const [showForm, setShowForm] =
@@ -128,6 +130,9 @@ const [editingId,
 setEditingId] =
 useState(null);
   return (
+
+    <DashboardLayout>
+    <div className="patients-container">
     <div className="patients-page">
 
       <div className="patients-header">
@@ -425,7 +430,8 @@ showForm && (
 )
 }
      
-
+</div>
     </div>
+    </DashboardLayout>
   );
 }

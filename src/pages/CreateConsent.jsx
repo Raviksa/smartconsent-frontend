@@ -176,24 +176,24 @@ console.log(selectedImages);
 const token =
   localStorage.getItem("token");
 
-const res =
-  await axios.post(
-    `${import.meta.env.VITE_API_URL}/api/pdf/generate`,
-    {
-      patient: selectedPatient,
-      procedure: selectedProcedure,
-      consent: generatedConsent,
-      illustrations: selectedImages
-    },
-    {
-      responseType: "blob",
-      headers: {
-        Authorization:
-          `Bearer ${token}`
-      }
-    }
-  );
+console.log("Sending language:", language);
 
+const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/pdf/generate`,
+  {
+    patient: selectedPatient,
+    procedure: selectedProcedure,
+    consent: generatedConsent,
+    illustrations: selectedImages,
+    language
+  },
+  {
+    responseType: "blob",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
     const file =
       new Blob(
         [res.data],

@@ -24,12 +24,37 @@ export default function CreateConsent() {
   "Kidney Disease",
   "Anticoagulants"
 ];
+const surgicalTechniques = [
+"Conventional Surgery",
+"Minimally Invasive",
+"Robotic Assisted",
+"Navigation Assisted",
+"Computer Assisted",
+"Revision Surgery"
+];
+const patientComplexity = [
+"High Risk Patient",
+"Severe Deformity",
+"Bone Loss",
+"Previous Surgery",
+"Infection",
+"Morbid Obesity",
+"Osteoporosis"
+];
+const perioperativeCare = [
+"Blood Transfusion May Be Required",
+"Drain May Be Inserted",
+"Tissue Sample Will Be Sent for Biopsy",
+"Physiotherapy Required",
+"Walking Aid (Walker/Crutches)",
+"ICU Observation May Be Required"
+];
+const [selectedRisks,setSelectedRisks] = useState([]);
+const [selectedTechniques, setSelectedTechniques] = useState([]);
 
-const [
-  selectedRisks,
-  setSelectedRisks
-] = useState([]);
+const [selectedComplexity, setSelectedComplexity] = useState([]);
 
+const [selectedCare, setSelectedCare] = useState([]);
   const [
   selectedIllustrations,
   setSelectedIllustrations
@@ -141,6 +166,14 @@ const res =
       patient: selectedPatient,
       procedure: selectedProcedure,
       risks: selectedRisks,
+      surgicalTechniques: selectedTechniques,
+
+     patientComplexity: selectedComplexity,
+
+     perioperativeCare: selectedCare,
+
+     instructions: additionalInstructions,
+
       instructions: additionalInstructions,
       language
     },
@@ -473,64 +506,133 @@ useState("English");
 
 
 
-<h3>
-Patient Specific Risks
-</h3>
+<div className="options-grid">
 
-<div className="risk-grid">
-</div>
+  <div className="option-card">
 
-{
-risks.map(
-  risk => (
+    <h3>Patient Risk Factors</h3>
 
-    <div
-      key={risk}
-    >
+    {risks.map(risk => (
 
+      <label
+        key={risk}
+        className="checkbox-item"
+      >
+
+        <input
+          type="checkbox"
+          checked={selectedRisks.includes(risk)}
+          onChange={() => {
+
+            if(selectedRisks.includes(risk)){
+
+              setSelectedRisks(
+                selectedRisks.filter(
+                  r => r !== risk
+                )
+              );
+
+            }else{
+
+              setSelectedRisks([
+                ...selectedRisks,
+                risk
+              ]);
+
+            }
+
+          }}
+        />
+
+        {risk}
+
+      </label>
+
+    ))}
+
+  </div>
+
+  <div className="option-card">
+  <h3>Surgical Technique</h3>
+
+  {surgicalTechniques.map((item) => (
+    <label key={item} className="checkbox-item">
       <input
         type="checkbox"
-        checked={
-          selectedRisks.includes(
-            risk
-          )
-        }
+        checked={selectedTechniques.includes(item)}
         onChange={() => {
-
-          if (
-            selectedRisks.includes(
-              risk
-            )
-          ) {
-
-            setSelectedRisks(
-              selectedRisks.filter(
-                r => r !== risk
-              )
+          if (selectedTechniques.includes(item)) {
+            setSelectedTechniques(
+              selectedTechniques.filter((t) => t !== item)
             );
-
           } else {
-
-            setSelectedRisks([
-              ...selectedRisks,
-              risk
+            setSelectedTechniques([
+              ...selectedTechniques,
+              item,
             ]);
           }
         }}
       />
+      {item}
+    </label>
+  ))}
+</div>
 
-      {risk}
+ <div className="option-card">
+  <h3>Patient Complexity</h3>
 
-    </div>
-    
+  {patientComplexity.map((item) => (
+    <label key={item} className="checkbox-item">
+      <input
+        type="checkbox"
+        checked={selectedComplexity.includes(item)}
+        onChange={() => {
+          if (selectedComplexity.includes(item)) {
+            setSelectedComplexity(
+              selectedComplexity.filter((c) => c !== item)
+            );
+          } else {
+            setSelectedComplexity([
+              ...selectedComplexity,
+              item,
+            ]);
+          }
+        }}
+      />
+      {item}
+    </label>
+  ))}
+</div>
+<div className="option-card">
+  <h3>Perioperative & Postoperative Care</h3>
 
+  {perioperativeCare.map((item) => (
+    <label key={item} className="checkbox-item">
+      <input
+        type="checkbox"
+        checked={selectedCare.includes(item)}
+        onChange={() => {
+          if (selectedCare.includes(item)) {
+            setSelectedCare(
+              selectedCare.filter((c) => c !== item)
+            );
+          } else {
+            setSelectedCare([
+              ...selectedCare,
+              item,
+            ]);
+          }
+        }}
+      />
+      {item}
+    </label>
+  ))}
+</div>
+</div>
 
-  )
-)
-}
 <div className="card"></div>
 <h3>
-Additional Instructions
+Surgeon's Additional Notes
 </h3>
 
 <textarea

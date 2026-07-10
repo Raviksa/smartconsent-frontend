@@ -150,47 +150,51 @@ const [selectedCare, setSelectedCare] = useState([]);
       console.log(err);
     }
   };
-  const generateConsent =
-async () => {
-console.log("Generate clicked");
-  console.log("API URL:", import.meta.env.VITE_API_URL);
+const generateConsent = async () => {
+
+  console.log("Generate clicked");
+
+  setLoadingDraft(true);   // <-- ADD THIS
+
   try {
 
     const token =
-  localStorage.getItem("token");
+      localStorage.getItem("token");
 
-const res =
-  await axios.post(
-    `${import.meta.env.VITE_API_URL}/api/ai/generate-consent`,
-    {
-      patient: selectedPatient,
-      procedure: selectedProcedure,
-      risks: selectedRisks,
-      surgicalTechniques: selectedTechniques,
+    const res =
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/ai/generate-consent`,
+        {
+          patient: selectedPatient,
+          procedure: selectedProcedure,
+          risks: selectedRisks,
+          surgicalTechniques: selectedTechniques,
+          patientComplexity: selectedComplexity,
+          perioperativeCare: selectedCare,
+          instructions: additionalInstructions,
+          language
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
-     patientComplexity: selectedComplexity,
+    setGeneratedConsent(res.data.consent);
 
-     perioperativeCare: selectedCare,
-
-     instructions: additionalInstructions,
-
-      instructions: additionalInstructions,
-      language
-    },
-    {
-      headers: {
-        Authorization:
-          `Bearer ${token}`
-      }
-    }
-  );
-    setGeneratedConsent(
-      res.data.consent
-    );
-
-  } catch (err) {
-    console.log(err);
   }
+  catch(err){
+
+    console.log(err);
+
+  }
+  finally{
+
+    setLoadingDraft(false);   // <-- ALWAYS stop loading
+
+  }
+
 };
 const generatePdf =
 async () => {
@@ -258,11 +262,14 @@ const res = await axios.post(
     link.remove();
 
   } catch (err) {
+    setLoadingDraft(false);
     console.log(err);
   }
 };
 const [language, setLanguage] =
 useState("English");
+
+const [loadingDraft, setLoadingDraft] = useState(false);
   return (
     <DashboardLayout>
    <div className="page-container">
@@ -270,7 +277,7 @@ useState("English");
   Create Consent
      </h1>
      <p>Patients Loaded: {patients.length}</p>
-<p>Procedures Loaded: {procedures.length}</p>
+     <p>Procedures Loaded: {procedures.length}</p>
      
     <div className="top-section">
 
@@ -678,10 +685,43 @@ Regional Language
 <button
   className="primary-btn"
   onClick={generateConsent}
+  disabled={loadingDraft}
 >
-  Generate AI Draft
+  {loadingDraft
+    ? "Generating..."
+    : "Generate AI Draft"}
 </button>
+{loadingDraft && (
 
+<div className="ai-loading">
+
+  <div className="spinner"></div>
+
+  <h3>Please wait...</h3>
+
+  <p>
+    AI is generating your informed consent draft.
+  </p>
+
+  <p>
+    Reviewing patient information...
+  </p>
+
+  <p>
+    Personalizing surgical risks...
+  </p>
+
+  <p>
+    Preparing multilingual draft...
+  </p>
+
+  <p className="loading-note">
+    This usually takes 10–20 seconds.
+  </p>
+
+</div>
+
+)}
 <textarea
   className="consent-textarea"
   value={generatedConsent}

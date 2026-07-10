@@ -1,13 +1,13 @@
 import DashboardLayout
 from "../components/DashboardLayout";
-
+import { useNavigate } from "react-router-dom";
 export default function Profile() {
 
   const user =
     JSON.parse(
       localStorage.getItem("user")
     );
-
+const navigate = useNavigate();
   return (
     <DashboardLayout>
 
@@ -53,10 +53,11 @@ export default function Profile() {
           </p>
 
           <button
-            className="primary-btn"
-          >
+         className="primary-btn"
+          onClick={() => navigate("/edit-profile")}
+           >
             Edit Profile
-          </button>
+           </button>
 
         </div>
 

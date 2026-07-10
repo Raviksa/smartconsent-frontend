@@ -11,8 +11,9 @@ import Subscription from "./pages/Subscription";
 import Patients from "./pages/Patients";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import EditProfile from "./pages/EditProfile";
 
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -20,41 +21,74 @@ function App() {
 
       <Routes>
 
+        {/* Public Routes */}
+
         <Route
           path="/"
           element={<Login />}
         />
 
         <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        {/* Protected Routes */}
+
+        <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/create-consent"
-          element={<CreateConsent />}
+          element={
+            <ProtectedRoute>
+              <CreateConsent />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/subscription"
-          element={<Subscription />}
+          element={
+            <ProtectedRoute>
+              <Subscription />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/patients"
-          element={<Patients />}
+          element={
+            <ProtectedRoute>
+              <Patients />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/profile"
-          element={<Profile />}
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
         />
 
         <Route
-          path="/register"
-          element={<Register />}
+          path="/edit-profile"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
         />
-    
+
       </Routes>
 
     </BrowserRouter>

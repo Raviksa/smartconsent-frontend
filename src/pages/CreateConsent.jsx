@@ -17,12 +17,14 @@ export default function CreateConsent() {
 
   const risks = [
   "Diabetes",
+  "Hypertension",
   "Obesity",
   "Smoking",
   "Previous Surgery",
   "Cardiac Disease",
   "Kidney Disease",
   "Anticoagulants"
+
 ];
 const surgicalTechniques = [
 "Conventional Surgery",

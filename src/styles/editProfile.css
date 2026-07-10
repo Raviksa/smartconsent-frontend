@@ -1,0 +1,43 @@
+.page-container{
+  width:95%;
+  margin:auto;
+  padding:30px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.card label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:8px;
+  font-weight:600;
+}
+
+.card input{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-size:15px;
+}
+
+.card input:focus{
+  outline:none;
+  border-color:#2563eb;
+}
+
+.readonly-input{
+  background:#f5f5f5;
+  color:#666;
+  cursor:not-allowed;
+}
+
+.primary-btn{
+  margin-top:10px;
+}

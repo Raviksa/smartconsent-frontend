@@ -407,16 +407,16 @@ const [loadingDraft, setLoadingDraft] = useState(false);
             Procedure Video
           </h3>
 
-          <video
-            controls
-          >
-            <source
-              src={
-                selectedProcedure.video_url
-              }
-              type="video/mp4"
-            />
-          </video>
+         <video
+  key={selectedProcedure?.video_url}
+  controls
+  width="100%"
+>
+  <source
+    src={selectedProcedure?.video_url}
+    type="video/mp4"
+  />
+</video>
 
         </div>
 
